@@ -1,0 +1,19 @@
+{
+	"name": "ldinc_railgun_artillery",
+	"version": "0.0.1",
+	"title": "Railgun artillery",
+	"author": "ldinc",
+	"homepage": "",
+	"description": "Railgun artillery",
+	"factorio_version": "2.0",
+	"dependencies": [
+		"base",
+		"space-age"
+	],
+	"quality_required": false,
+	"space_travel_required": false,
+	"spoiling_required": false,
+	"freezing_required": false,
+	"segmented_units_required": false,
+	"expansion_shaders_required": false
+}

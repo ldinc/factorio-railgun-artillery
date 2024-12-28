@@ -1,0 +1,15 @@
+{
+    "factorio.versions": [
+        {
+            "name": "spaceage",
+            "factorioPath": "d:\\Games\\Factorio\\bin\\x64\\factorio.exe",
+            "active": true
+        }
+    ],
+    "Lua.workspace.userThirdParty": [
+        "c:\\Users\\ldinc\\AppData\\Roaming\\Code\\User\\workspaceStorage\\ed26ed0946e71a5d91960da1df637995\\justarandomgeek.factoriomod-debug\\sumneko-3rd"
+    ],
+    "Lua.workspace.checkThirdParty": "ApplyInMemory",
+    "editor.useTabStops": true,
+    "editor.tabSize": 2 
+}
