@@ -34,7 +34,7 @@ function ldinc_railgun_artillery.lib.script.manager.new()
 		electric_interfaces = {},
 
 		---@type table<integer, Railgun_UI_UpdateInfo>
-		ui = {}
+		ui = {},
 	}
 
 	if not storage.ldinc then storage.ldinc = {} end
@@ -42,6 +42,49 @@ function ldinc_railgun_artillery.lib.script.manager.new()
 
 	storage.ldinc.railgun.manager = manager
 	ldinc_railgun_artillery.lib.script.manager.update()
+end
+
+---@param railgun LuaEntity
+---@param electric_interface? LuaEntity
+local function disable_railgun(railgun, electric_interface)
+	if not railgun.valid then
+		return
+	end
+	
+	railgun.active = false
+	railgun.custom_status = {
+		diode = defines.entity_status_diode.yellow,
+		label = {"entity-status.charging"},
+		-- label = {"description.ldinc_railgun_artillery_status_recharging"},
+	}
+
+	if electric_interface and electric_interface.valid then
+
+		if electric_interface.energy < ldinc_railgun_artillery.lib.features.energy_per_shot then
+			railgun.custom_status = {
+				diode = defines.entity_status_diode.red,
+				label = {"entity-status.low-power"},
+			}
+		end
+
+		if electric_interface.status == defines.entity_status.no_power then
+			railgun.custom_status = {
+				diode = defines.entity_status_diode.red,
+				label = {"entity-status.no-power"},
+			}
+		end
+
+
+	end
+end
+
+---@param railgun LuaEntity
+local function enable_railgun(railgun)
+	railgun.active = true
+	railgun.custom_status = {
+		diode = defines.entity_status_diode.green,
+		label = {"description.ldinc_railgun_artillery_status_ready"}
+	}
 end
 
 function ldinc_railgun_artillery.lib.script.manager.update()
@@ -87,7 +130,9 @@ local function state_update_for_entity(index)
 	end
 
 	if electric_interface.energy >= ldinc_railgun_artillery.lib.features.energy_per_shot then
-		artillery.active = true
+		enable_railgun(artillery)
+	else 
+		disable_railgun(artillery, electric_interface)
 	end
 end
 
@@ -229,7 +274,7 @@ function ldinc_railgun_artillery.lib.script.manager.on_built_entity(railgun)
 
 	local railgun_id = railgun.unit_number
 
-	railgun.active = false
+	disable_railgun(railgun, electric_interface)
 
 	local info = {
 		entity = railgun,
@@ -301,6 +346,6 @@ function ldinc_railgun_artillery.lib.script.manager.on_trigger_fired_artillery(r
 	)
 
 	if electric_interface.energy < ldinc_railgun_artillery.lib.features.energy_per_shot then
-		railgun.active = false
+		disable_railgun(railgun, electric_interface)
 	end
 end

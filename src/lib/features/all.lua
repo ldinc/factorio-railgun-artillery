@@ -2,7 +2,7 @@ if not ldinc_railgun_artillery then ldinc_railgun_artillery = {} end
 if not ldinc_railgun_artillery.lib then ldinc_railgun_artillery.lib = {} end
 if not ldinc_railgun_artillery.lib.features then ldinc_railgun_artillery.lib.features = {} end
 
-require("util")
+-- require("util")
 require("lib.features.extractor")
 
 local get_int = ldinc_railgun_artillery.lib.features.startup.get_int_value_from_setting
