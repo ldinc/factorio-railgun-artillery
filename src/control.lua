@@ -14,8 +14,8 @@ script.on_init(
 
 script.on_load(
 	function()
-		if storage.ldinc and storage.ldinc.railgun_manager then
-			storage.ldinc.railgun.manager = storage.ldinc.railgun_manager
+		if storage and storage.railgun_manager then
+			storage.railgun.manager = storage.railgun_manager
 		end
 	end
 )
@@ -108,7 +108,7 @@ script.on_event(defines.events.on_gui_closed, function(event)
 	if event.gui_type == defines.gui_type.entity and event.entity.name == 'ldinc-railgun-artillery' then
 		local player = game.players[event.player_index]
 
-		ldinc_railgun_artillery.lib.script.gui.destroy_extension(player, event.entity)
+		ldinc_railgun_artillery.lib.script.gui.destroy_extension(player)
 	end
 end
 )

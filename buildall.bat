@@ -1,23 +1,25 @@
-@REM @echo off
+@REM @REM @echo off
 
-set target=%1
+@REM set target=%1
 
-if "%~1" == "" (
-  echo "try build all"
+@REM if "%~1" == "" (
+@REM   echo "try build all"
 
-) else (
+@REM ) else (
 
-  echo try build the %target%
+@REM   echo try build the %target%
 
-  set modname='none'
-  set version='none'
+@REM   set modname='none'
+@REM   set version='none'
 
-  echo %modname% %version%
+@REM   echo %modname% %version%
 
-  for /f "tokens=* delims=" %%# in ('jq -r ".name" %target%/info.json') do @(set modname=%%#)
-  for /f "tokens=* delims=" %%# in ('jq -r ".version" %target%/info.json') do @(set version=%%#)
+@REM   for /f "tokens=* delims=" %%# in ('jq -r ".name" %target%/info.json') do @(set modname=%%#)
+@REM   for /f "tokens=* delims=" %%# in ('jq -r ".version" %target%/info.json') do @(set version=%%#)
 
-  echo packing %modname% into %modname%_%version%.zip
+@REM   echo packing %modname% into %modname%_%version%.zip
 
-  tar.exe -a -c -f  %modname%_%version%.zip %target%
-)
+@REM   tar.exe -a -c -f  %modname%_%version%.zip %target%
+@REM )
+
+goft.exe -b

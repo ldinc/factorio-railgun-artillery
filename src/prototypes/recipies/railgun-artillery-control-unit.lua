@@ -12,11 +12,11 @@ local recipe = {
 			name = "artillery-shell",
 			amount = 1,
 		},
-		{
-			type = "fluid",
-			name = "fluoroketone-cold",
-			amount = 25,
-		},
+		-- {
+		-- 	type = "fluid",
+		-- 	name = "fluoroketone-cold",
+		-- 	amount = 25,
+		-- },
 	},
 	main_product = "ldinc-railgun-ammo-loaded",
 	results = {
@@ -25,11 +25,11 @@ local recipe = {
 			name = "ldinc-railgun-ammo-loaded",
 			amount = 1,
 		},
-		{
-			type = "fluid",
-			name = "fluoroketone-hot",
-			amount = 25,
-		}
+		-- {
+		-- 	type = "fluid",
+		-- 	name = "fluoroketone-hot",
+		-- 	amount = 25,
+		-- }
 	},
 	energy_required = 2,
 	hide_from_stats = true,

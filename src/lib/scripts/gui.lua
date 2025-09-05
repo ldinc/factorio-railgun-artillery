@@ -99,6 +99,7 @@ function ldinc_railgun_artillery.lib.script.gui.make_extension(player, entity, e
 	end
 
 	ldinc_railgun_artillery.lib.script.manager.register_opened_ui({
+		player_index = player.index,
 		railgun_id = entity.unit_number,
 		progressbar = progressbar,
 		statusbar = statusbar,
@@ -106,8 +107,7 @@ function ldinc_railgun_artillery.lib.script.gui.make_extension(player, entity, e
 end
 
 ---@param player LuaPlayer
----@param railgun LuaEntity
-function ldinc_railgun_artillery.lib.script.gui.destroy_extension(player, railgun)
+function ldinc_railgun_artillery.lib.script.gui.destroy_extension(player)
 		local gui = player.gui.relative
 
 		local elem = gui[frame_name]
@@ -116,5 +116,5 @@ function ldinc_railgun_artillery.lib.script.gui.destroy_extension(player, railgu
 			elem.destroy()
 		end
 
-		ldinc_railgun_artillery.lib.script.manager.register_closed_ui(railgun.unit_number)
+		ldinc_railgun_artillery.lib.script.manager.register_closed_ui(player.index)
 end

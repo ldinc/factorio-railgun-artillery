@@ -7,5 +7,5 @@ function ldinc_railgun_artillery.lib.script.on_load()
     ldinc_railgun_artillery.storage = {}
   end
 
-  ldinc_railgun_artillery.storage.manager = storage.ldinc.railgun.manager
+  ldinc_railgun_artillery.storage.manager = storage.railgun.manager
 end

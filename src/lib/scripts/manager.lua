@@ -10,6 +10,7 @@ require("lib.features.all")
 ---@field electric_interface_id integer
 
 ---@class Railgun_UI_UpdateInfo
+---@field player_index integer
 ---@field railgun_id integer
 ---@field progressbar LuaGuiElement
 ---@field statusbar LuaGuiElement
@@ -37,10 +38,9 @@ function ldinc_railgun_artillery.lib.script.manager.new()
 		ui = {},
 	}
 
-	if not storage.ldinc then storage.ldinc = {} end
-	if not storage.ldinc.railgun then storage.ldinc.railgun = {} end
+	if not storage.railgun then storage.railgun = {} end
 
-	storage.ldinc.railgun.manager = manager
+	storage.railgun.manager = manager
 	ldinc_railgun_artillery.lib.script.manager.update()
 end
 
@@ -50,31 +50,28 @@ local function disable_railgun(railgun, electric_interface)
 	if not railgun.valid then
 		return
 	end
-	
+
 	railgun.active = false
 	railgun.custom_status = {
 		diode = defines.entity_status_diode.yellow,
-		label = {"entity-status.charging"},
+		label = { "entity-status.charging" },
 		-- label = {"description.ldinc_railgun_artillery_status_recharging"},
 	}
 
 	if electric_interface and electric_interface.valid then
-
 		if electric_interface.energy < ldinc_railgun_artillery.lib.features.energy_per_shot then
 			railgun.custom_status = {
 				diode = defines.entity_status_diode.red,
-				label = {"entity-status.low-power"},
+				label = { "entity-status.low-power" },
 			}
 		end
 
 		if electric_interface.status == defines.entity_status.no_power then
 			railgun.custom_status = {
 				diode = defines.entity_status_diode.red,
-				label = {"entity-status.no-power"},
+				label = { "entity-status.no-power" },
 			}
 		end
-
-
 	end
 end
 
@@ -83,31 +80,30 @@ local function enable_railgun(railgun)
 	railgun.active = true
 	railgun.custom_status = {
 		diode = defines.entity_status_diode.green,
-		label = {"description.ldinc_railgun_artillery_status_ready"}
+		label = { "description.ldinc_railgun_artillery_status_ready" }
 	}
 end
 
 function ldinc_railgun_artillery.lib.script.manager.update()
-	if not storage.ldinc then return end
-	if not storage.ldinc.railgun then return end
-	if not storage.ldinc.railgun.manager then return end
+	if not storage.railgun then return end
+	if not storage.railgun.manager then return end
 
-	storage.ldinc.railgun.manager.state.limit = ldinc_railgun_artillery.lib.features.entities_per_update
+	storage.railgun.manager.state.limit = ldinc_railgun_artillery.lib.features.entities_per_update
 end
 
 ---@param index int64
 local function state_update_for_entity(index)
-	local railgun_id = storage.ldinc.railgun.manager.state.queue[index]
+	local railgun_id = storage.railgun.manager.state.queue[index]
 
-	if storage.ldinc.railgun.manager.state.destroyed[railgun_id] then
-		table.remove(storage.ldinc.railgun.manager.state.queue, index)
-		storage.ldinc.railgun.manager.state.destroyed[railgun_id] = nil
+	if storage.railgun.manager.state.destroyed[railgun_id] then
+		table.remove(storage.railgun.manager.state.queue, index)
+		storage.railgun.manager.state.destroyed[railgun_id] = nil
 
 		return
 	end
 
 
-	local info = storage.ldinc.railgun.manager.railguns[railgun_id]
+	local info = storage.railgun.manager.railguns[railgun_id]
 
 	if not info then
 		return
@@ -123,7 +119,7 @@ local function state_update_for_entity(index)
 		return
 	end
 
-	local electric_interface = storage.ldinc.railgun.manager.electric_interfaces[info.electric_interface_id]
+	local electric_interface = storage.railgun.manager.electric_interfaces[info.electric_interface_id]
 
 	if not electric_interface or not electric_interface.valid then
 		return
@@ -131,22 +127,21 @@ local function state_update_for_entity(index)
 
 	if electric_interface.energy >= ldinc_railgun_artillery.lib.features.energy_per_shot then
 		enable_railgun(artillery)
-	else 
+	else
 		disable_railgun(artillery, electric_interface)
 	end
 end
 
 function ldinc_railgun_artillery.lib.script.manager.state_update()
-	if not storage.ldinc then return end
-	if not storage.ldinc.railgun then return end
-	if not storage.ldinc.railgun.manager then return end
-	if not storage.ldinc.railgun.manager.state then return end
+	if not storage.railgun then return end
+	if not storage.railgun.manager then return end
+	if not storage.railgun.manager.state then return end
 
-	local total_count = #storage.ldinc.railgun.manager.state.queue
+	local total_count = #storage.railgun.manager.state.queue
 
 	if total_count == 0 then return end
 
-	local index = storage.ldinc.railgun.manager.state.current
+	local index = storage.railgun.manager.state.current
 	local handled = 0
 
 	while true do
@@ -160,9 +155,9 @@ function ldinc_railgun_artillery.lib.script.manager.state_update()
 
 		handled = handled + 1
 
-		if handled > storage.ldinc.railgun.manager.state.limit then
+		if handled > storage.railgun.manager.state.limit then
 			-- save state
-			storage.ldinc.railgun.manager.state.current = index
+			storage.railgun.manager.state.current = index
 
 			return
 		end
@@ -170,9 +165,15 @@ function ldinc_railgun_artillery.lib.script.manager.state_update()
 end
 
 ---@class Railgun_UI_State
+---@field player_index integer
 ---@field progressbar? LuaGuiElement
 ---@field statusbar? LuaGuiElement
 ---@field railgun_id integer
+
+--- NOTE:
+--- Well. With multiplayer game you need to wait server ack that  gui still opened...
+--- So there is anoying lag with adding extra frame to entity. Sad.
+--- https://forums.factorio.com/viewtopic.php?t=90795
 
 ---@param state Railgun_UI_State
 function ldinc_railgun_artillery.lib.script.manager.register_opened_ui(state)
@@ -184,17 +185,18 @@ function ldinc_railgun_artillery.lib.script.manager.register_opened_ui(state)
 		return
 	end
 
-	local info = storage.ldinc.railgun.manager.railguns[state.railgun_id]
+	local info = storage.railgun.manager.railguns[state.railgun_id]
 
 	if not info then
 		return
 	end
 
-	if not storage.ldinc.railgun.manager.electric_interfaces[info.electric_interface_id] then
+	if not storage.railgun.manager.electric_interfaces[info.electric_interface_id] then
 		return
 	end
 
-	storage.ldinc.railgun.manager.ui[state.railgun_id] = {
+	storage.railgun.manager.ui[state.player_index] = {
+		player_index = state.player_index,
 		railgun_id = state.railgun_id,
 		progressbar = state.progressbar,
 		statusbar = state.statusbar,
@@ -202,9 +204,9 @@ function ldinc_railgun_artillery.lib.script.manager.register_opened_ui(state)
 	}
 end
 
----@param railgun_id integer
-function ldinc_railgun_artillery.lib.script.manager.register_closed_ui(railgun_id)
-	storage.ldinc.railgun.manager.ui[railgun_id] = nil
+---@param player_index integer
+function ldinc_railgun_artillery.lib.script.manager.register_closed_ui(player_index)
+	storage.railgun.manager.ui[player_index] = nil
 end
 
 --- check if ui updates > 256... drop table?
@@ -213,10 +215,20 @@ function ldinc_railgun_artillery.lib.script.manager.update_ui()
 	local energy_per_shot = ldinc_railgun_artillery.lib.features.energy_per_shot
 	local energy_limit = energy_per_shot * stack_size
 
-	for _, state in pairs(storage.ldinc.railgun.manager.ui) do
-		if not state then goto continue end
+	for player_index, state in pairs(storage.railgun.manager.ui) do
+		if not state then
+			ldinc_railgun_artillery.lib.script.manager.register_closed_ui(player_index)
 
-		local electric_interface = storage.ldinc.railgun.manager.electric_interfaces[state.electric_interface_id]
+			goto continue
+		end
+
+		if not game.get_player(player_index) then
+			ldinc_railgun_artillery.lib.script.manager.register_closed_ui(player_index)
+
+			goto continue
+		end
+
+		local electric_interface = storage.railgun.manager.electric_interfaces[state.electric_interface_id]
 
 		if not electric_interface or not electric_interface.valid then goto continue end
 
@@ -281,13 +293,13 @@ function ldinc_railgun_artillery.lib.script.manager.on_built_entity(railgun)
 		electric_interface_id = electric_interface.unit_number,
 	}
 
-	storage.ldinc.railgun.manager.railguns[railgun_id or 0] = info
+	storage.railgun.manager.railguns[railgun_id or 0] = info
 
 	if railgun_id then
-		table.insert(storage.ldinc.railgun.manager.state.queue, railgun_id)
+		table.insert(storage.railgun.manager.state.queue, railgun_id)
 	end
 
-	storage.ldinc.railgun.manager.electric_interfaces[electric_interface.unit_number] = electric_interface
+	storage.railgun.manager.electric_interfaces[electric_interface.unit_number] = electric_interface
 end
 
 ---@param railgun LuaEntity
@@ -300,22 +312,22 @@ function ldinc_railgun_artillery.lib.script.manager.on_destroy_entity(railgun)
 		return
 	end
 
-	local info = storage.ldinc.railgun.manager.railguns[railgun.unit_number]
+	local info = storage.railgun.manager.railguns[railgun.unit_number]
 
 	if not info then
 		return
 	end
 
-	local electric_interface = storage.ldinc.railgun.manager.electric_interfaces[info.electric_interface_id]
+	local electric_interface = storage.railgun.manager.electric_interfaces[info.electric_interface_id]
 
 	if electric_interface then
-		storage.ldinc.railgun.manager.electric_interfaces[electric_interface.unit_number] = nil
+		storage.railgun.manager.electric_interfaces[electric_interface.unit_number] = nil
 
 		electric_interface.destroy()
 	end
 
-	storage.ldinc.railgun.manager.railguns[railgun.unit_number] = nil
-	storage.ldinc.railgun.manager.state.destroyed[railgun.unit_number] = true
+	storage.railgun.manager.railguns[railgun.unit_number] = nil
+	storage.railgun.manager.state.destroyed[railgun.unit_number] = true
 end
 
 ---@param railgun? LuaEntity
@@ -328,13 +340,13 @@ function ldinc_railgun_artillery.lib.script.manager.on_trigger_fired_artillery(r
 		return
 	end
 
-	local info = storage.ldinc.railgun.manager.railguns[railgun.unit_number]
+	local info = storage.railgun.manager.railguns[railgun.unit_number]
 
 	if not info then
 		return
 	end
 
-	local electric_interface = storage.ldinc.railgun.manager.electric_interfaces[info.electric_interface_id]
+	local electric_interface = storage.railgun.manager.electric_interfaces[info.electric_interface_id]
 
 	if not electric_interface or not electric_interface.valid then
 		return
