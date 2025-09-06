@@ -44,6 +44,15 @@ function ldinc_railgun_artillery.lib.script.manager.new()
 	ldinc_railgun_artillery.lib.script.manager.update()
 end
 
+---@type table<string,  (string|(string|(string)[])[])?>
+local loc_strings = {
+	l = {"ldinc_railgun_artillery_info", "low" },
+	m = {"ldinc_railgun_artillery_info", "mid-level" },
+	f = {"ldinc_railgun_artillery_info", "full" },
+}
+
+
+
 ---@param railgun LuaEntity
 ---@param electric_interface? LuaEntity
 local function disable_railgun(railgun, electric_interface)
@@ -55,7 +64,6 @@ local function disable_railgun(railgun, electric_interface)
 	railgun.custom_status = {
 		diode = defines.entity_status_diode.yellow,
 		label = { "entity-status.charging" },
-		-- label = {"description.ldinc_railgun_artillery_status_recharging"},
 	}
 
 	if electric_interface and electric_interface.valid then
@@ -71,6 +79,7 @@ local function disable_railgun(railgun, electric_interface)
 				diode = defines.entity_status_diode.red,
 				label = { "entity-status.no-power" },
 			}
+
 		end
 	end
 end

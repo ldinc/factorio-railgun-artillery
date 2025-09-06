@@ -1,4 +1,5 @@
 require("lib.constant")
+require("lib.features.all")
 
 local hit_effects = require("__base__.prototypes.entity.hit-effects")
 local sounds = require("__base__.prototypes.entity.sounds")
@@ -13,6 +14,13 @@ gun.attack_parameters.cooldown = 60
 gun.attack_parameters.range = 400
 gun.attack_parameters.damage_modifier = 10
 gun.attack_parameters.shell_particle = nil
+
+local fire_sound_filename = "__ldinc_railgun_artillery__/sound/fire-sound.ogg"
+
+if ldinc_railgun_artillery.lib.features.alt_sounds_enabled then
+	fire_sound_filename = "__ldinc_railgun_artillery__/sound/fire-sound-alt.ogg"
+end
+
 gun.attack_parameters.sound = {
 	switch_vibration_data =
 	{
@@ -25,9 +33,7 @@ gun.attack_parameters.sound = {
 		duration = 150,
 		play_for = "everything"
 	},
-	-- filename = "__ldinc_railgun_artillery__/sound/fire-sound.ogg",
-	-- volume = 0.7,
-	filename = "__ldinc_railgun_artillery__/sound/fire-sound-alt.ogg",
+	filename = fire_sound_filename,
 	volume = 0.9,
 	modifiers = volume_multiplier("main-menu", 0.9)
 }
@@ -181,6 +187,10 @@ artillery.cannon_parking_speed = 2
 
 artillery.gun = "ldinc-artillery-railgun-cannon"
 artillery.minable.result = "ldinc-railgun-artillery"
+
+artillery.localised_description = {
+	"ldinc_railgun_artillery_info", "mid-level"
+}
 
 data.extend(
 	{

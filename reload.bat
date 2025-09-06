@@ -6,9 +6,10 @@ set target=%1
 
 
 if %target%==unstable (
-  set target=%2
   set branch=unstable
 )
+
+set target=src
 
 echo target %target%
 echo release %branch%

@@ -6,6 +6,7 @@ if not ldinc_railgun_artillery.lib.features then ldinc_railgun_artillery.lib.fea
 require("lib.features.extractor")
 
 local get_int = ldinc_railgun_artillery.lib.features.startup.get_int_value_from_setting
+local get_bool = ldinc_railgun_artillery.lib.features.startup.get_boolean_value_from_setting
 
 --- MJ -> J
 ldinc_railgun_artillery.lib.features.energy_per_shot = get_int(
@@ -27,3 +28,8 @@ ldinc_railgun_artillery.lib.features.ticks = {
 	gui = get_int("ldinc_railgun_artillery_ticks_per_gui_update", 5),
 	update = get_int("ldinc_railgun_artillery_ticks_per_entities_update", 20),
 }
+
+ldinc_railgun_artillery.lib.features.alt_sounds_enabled = get_bool(
+	"ldinc_railgun_artillery_alt_sounds",
+	false
+)

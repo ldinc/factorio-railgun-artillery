@@ -47,6 +47,13 @@ local startup = {
 		maximum_value = 60,
 		order = "aa_a",
 	},
+		{
+		type = "bool-setting",
+		name = "ldinc_railgun_artillery_alt_sounds",
+		setting_type = "startup",
+		default_value = false,
+		order = "aa_a",
+	},
 }
 
 --- TODO: adding settings for damage & specs for artillery - radius and etc
