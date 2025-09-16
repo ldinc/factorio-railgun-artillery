@@ -1,5 +1,7 @@
 require("lib.constant")
 
+local item_sounds = require("__base__.prototypes.item_sounds")
+
 --- [ldinc-railgun-artillery]
 local item = table.deepcopy(data.raw["item"]["artillery-turret"])
 
@@ -7,6 +9,24 @@ item.name = "ldinc-railgun-artillery"
 item.place_result = "ldinc-railgun-artillery"
 
 data.extend({ item })
+
+
+--- [ldinc-railgun-artillery-shell-body]
+---@type data.ItemPrototype
+local body = {
+	type = "item",
+	name = ldinc_railgun_artillery.lib.constant.name.shell.body,
+	icon = "__ldinc_railgun_artillery__/graphics/entity/shell/shell-body-icon.png",
+	subgroup = "intermediate-product",
+	order = "d[railgun-artillery-parts]-a[body]",
+	inventory_move_sound = item_sounds.low_density_inventory_move,
+	pick_sound = item_sounds.low_density_inventory_pickup,
+	drop_sound = item_sounds.low_density_inventory_move,
+	stack_size = 50,
+	weight = 20*kg
+}
+
+data.extend({body})
 
 --- [ldinc-railgun-ammo-loaded]
 local ammo = table.deepcopy(data.raw["ammo"]["artillery-shell"])

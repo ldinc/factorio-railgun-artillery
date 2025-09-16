@@ -8,6 +8,14 @@ local technology = {
 		{
 			type = "unlock-recipe",
 			recipe = ldinc_railgun_artillery.lib.constant.name.artillery,
+		},
+		{
+			type = "unlock-recipe",
+			recipe = ldinc_railgun_artillery.lib.constant.name.shell.body
+		},
+		{
+			type = "unlock-recipe",
+			recipe = ldinc_railgun_artillery.lib.constant.name.shell.base
 		}
 		--- TODO: add ammos here
 	},

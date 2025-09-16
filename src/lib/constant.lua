@@ -16,3 +16,7 @@ ldinc_railgun_artillery.lib.constant.colors = {
 
 ldinc_railgun_artillery.lib.constant.name.artillery = "ldinc-railgun-artillery"
 ldinc_railgun_artillery.lib.constant.name.gun = "ldinc-artillery-railgun-cannon"
+ldinc_railgun_artillery.lib.constant.name.shell = {
+	base = "ldinc-railgun-ammo-loaded",
+	body = "ldinc-railgun-ammo-body"
+}
