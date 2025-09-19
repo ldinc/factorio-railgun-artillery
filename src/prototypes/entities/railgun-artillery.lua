@@ -10,6 +10,7 @@ local default_circuit_wire_max_distance = default_circuit_wire_max_distance or 9
 
 local gun = table.deepcopy(data.raw["gun"]["artillery-wagon-cannon"])
 gun.name = ldinc_railgun_artillery.lib.constant.name.gun
+gun.attack_parameters.ammo_categories = { ldinc_railgun_artillery.lib.constant.name.category }
 gun.attack_parameters.cooldown = 60
 gun.attack_parameters.range = 400
 gun.attack_parameters.damage_modifier = 10

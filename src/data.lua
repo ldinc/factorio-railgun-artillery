@@ -8,6 +8,7 @@ require("prototypes.recipies.railgun-artillery-control-unit")
 require("prototypes.entities.railgun-artillery")
 require("prototypes.entities.projectile")
 require("prototypes.entities.railgun-artillery-control-unit")
+require("prototypes.categories.ammo")
 require("prototypes.items.railgun-artillery")
 
 require("prototypes.style.railgun-artillery")

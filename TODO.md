@@ -1,9 +1,10 @@
 # Todo
 
 - [ ] Settings per artillery shells (scales?)
-- [ ] Copy existing shells recipe and items
+- [x] Copy existing shells recipe and items
 - [ ] Rerender model with barrel gun another angle
 - [ ] Tech icon
-- [ ] Item icon
+- [x] Item icon
+- [ ] TEch buffs (add new ammo category for buffs)
 - [ ] Readme
 - [ ] Release?

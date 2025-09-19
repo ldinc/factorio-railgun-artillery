@@ -3,6 +3,8 @@ if not ldinc_railgun_artillery.lib then ldinc_railgun_artillery.lib = {} end
 if not ldinc_railgun_artillery.lib.script then ldinc_railgun_artillery.lib.script = {} end
 if not ldinc_railgun_artillery.lib.script.gen then ldinc_railgun_artillery.lib.script.gen = {} end
 
+require("lib.constant")
+
 --- @param name string
 --- @param icon string?
 --- @return data.AmmoItemPrototype
@@ -10,6 +12,7 @@ function ldinc_railgun_artillery.lib.script.gen.shell_item(name, icon)
 	local ammo = table.deepcopy(data.raw["ammo"]["artillery-shell"])
 
 	ammo.name = name
+	ammo.ammo_category = ldinc_railgun_artillery.lib.constant.name.category
 	ammo.ammo_type.action.action_delivery.trigger_fired_artillery = true
 	ammo.ammo_type.action.action_delivery.source_effects = nil
 
@@ -20,7 +23,7 @@ function ldinc_railgun_artillery.lib.script.gen.shell_item(name, icon)
 	if not icon then
 		ammo.icon = "__ldinc_railgun_artillery__/graphics/icons/shell-body.png"
 	else
-		ammo.icon = "__ldinc_railgun_artillery__/graphics/icons/"..icon
+		ammo.icon = "__ldinc_railgun_artillery__/graphics/icons/" .. icon
 	end
 
 	return ammo

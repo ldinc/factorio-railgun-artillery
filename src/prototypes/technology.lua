@@ -1,3 +1,5 @@
+require("lib.constant")
+
 ---@type data.TechnologyPrototype
 local technology = {
 	type = "technology",
@@ -17,7 +19,6 @@ local technology = {
 			type = "unlock-recipe",
 			recipe = ldinc_railgun_artillery.lib.constant.name.shell.base
 		}
-		--- TODO: add ammos here
 	},
 	prerequisites = {
 		"artillery",
@@ -36,6 +37,31 @@ local technology = {
 		count = 2000,
 	},
 }
+
+local inf_tech = data.raw["technology"]["artillery-shell-damage-1"]
+
+if inf_tech then
+	table.insert(inf_tech.effects,
+		{
+			type = "ammo-damage",
+			ammo_category = ldinc_railgun_artillery.lib.constant.name.category,
+			modifier = 0.1
+		}
+	)
+end
+
+local speed_tech = data.raw["technology"]["artillery-shell-speed-1"]
+
+if speed_tech then
+	table.insert(speed_tech.effects,
+		{
+			type = "gun-speed",
+			ammo_category = ldinc_railgun_artillery.lib.constant.name.category,
+			icon = ldinc_railgun_artillery.lib.constant.path.icon,
+			modifier = 1
+		}
+	)
+end
 
 if mods["space-age"] then
 	technology.prerequisites = {

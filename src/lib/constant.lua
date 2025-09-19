@@ -2,6 +2,7 @@ if not ldinc_railgun_artillery then ldinc_railgun_artillery = {} end
 if not ldinc_railgun_artillery.lib then ldinc_railgun_artillery.lib = {} end
 if not ldinc_railgun_artillery.lib.constant then ldinc_railgun_artillery.lib.constant = {} end
 if not ldinc_railgun_artillery.lib.constant.name then ldinc_railgun_artillery.lib.constant.name = {} end
+if not ldinc_railgun_artillery.lib.constant.path then ldinc_railgun_artillery.lib.constant.path = {} end
 
 require("util")
 
@@ -20,3 +21,6 @@ ldinc_railgun_artillery.lib.constant.name.shell = {
 	base = "ldinc-railgun-ammo-loaded",
 	body = "ldinc-railgun-ammo-body"
 }
+ldinc_railgun_artillery.lib.constant.name.category = "ldinc-railgun-artillery-shell"
+
+ldinc_railgun_artillery.lib.constant.path.icon = "__ldinc_railgun_artillery__/graphics/entity/shell/shell-body.png"
