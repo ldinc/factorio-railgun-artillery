@@ -51,11 +51,11 @@ local projectile = {
 							{
 								{
 									type = "damage",
-									damage = { amount = 1000, type = "physical" }
+									damage = { amount = 50, type = "physical" }
 								},
 								{
 									type = "damage",
-									damage = { amount = 1000, type = "explosion" }
+									damage = { amount = 50, type = "explosion" }
 								}
 							}
 						}
@@ -107,7 +107,7 @@ local projectile = {
 					include_decals = false,
 					invoke_decorative_trigger = true,
 					decoratives_with_trigger_only = false, -- if true, destroys only decoratives that have trigger_effect set
-					radius = 3.5                           -- large radius for demostrative purposes
+					radius = 3.5                      -- large radius for demostrative purposes
 				}
 			}
 		}

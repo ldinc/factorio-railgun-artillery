@@ -8,7 +8,7 @@ local startup = {
 		default_value = 10,
 		minimum_value = 1,
 		maximum_value = 100,
-		order = "aa_a",
+		order = "ba_a",
 	},
 	{
 		type = "int-setting",
@@ -17,8 +17,8 @@ local startup = {
 		default_value = 10,
 		minimum_value = 1,
 		maximum_value = 200,
-		allowed_values = {1, 2, 5, 10, 20, 50, 100, 200},
-		order = "aa_a",
+		allowed_values = { 1, 2, 5, 10, 20, 50, 100, 200 },
+		order = "ba_a",
 	},
 	{
 		type = "int-setting",
@@ -27,7 +27,7 @@ local startup = {
 		default_value = 50,
 		minimum_value = 1,
 		maximum_value = 500,
-		order = "aa_a",
+		order = "pa_a",
 	},
 	{
 		type = "int-setting",
@@ -36,7 +36,7 @@ local startup = {
 		default_value = 20,
 		minimum_value = 1,
 		maximum_value = 100,
-		order = "aa_a",
+		order = "pa_a",
 	},
 	{
 		type = "int-setting",
@@ -45,15 +45,42 @@ local startup = {
 		default_value = 5,
 		minimum_value = 1,
 		maximum_value = 60,
-		order = "aa_a",
+		order = "pa_a",
 	},
-		{
+	{
 		type = "bool-setting",
 		name = "ldinc_railgun_artillery_alt_sounds",
 		setting_type = "startup",
 		default_value = false,
-		order = "aa_a",
+		order = "sa_a",
 	},
+	{
+		type = "int-setting",
+		name = "ldinc_railgun_artillery_damage_scale",
+		setting_type = "startup",
+		default_value = 5,
+		minimum_value = 1,
+		maximum_value = 1000,
+		order = "ba_a",
+	},
+	{
+		type = "int-setting",
+		name = "ldinc_railgun_artillery_recipe_scale",
+		setting_type = "startup",
+		default_value = 3,
+		minimum_value = 1,
+		maximum_value = 1000,
+		order = "ba_a",
+	},
+	{
+		type = "int-setting",
+		name = "ldinc_railgun_artillery_base_radius",
+		setting_type = "startup",
+		default_value = 400,
+		minimum_value = 250,
+		maximum_value = 1000,
+		order = "ba_a",
+	}
 }
 
 --- TODO: adding settings for damage & specs for artillery - radius and etc

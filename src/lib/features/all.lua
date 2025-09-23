@@ -33,3 +33,13 @@ ldinc_railgun_artillery.lib.features.alt_sounds_enabled = get_bool(
 	"ldinc_railgun_artillery_alt_sounds",
 	false
 )
+
+ldinc_railgun_artillery.lib.features.scale = {
+	damage = get_int("ldinc_railgun_artillery_damage_scale", 5),
+	recipe = get_int("ldinc_railgun_artillery_recipe_scale", 1)
+}
+
+ldinc_railgun_artillery.lib.features.radius = get_int(
+	"ldinc_railgun_artillery_base_radius",
+	400
+)

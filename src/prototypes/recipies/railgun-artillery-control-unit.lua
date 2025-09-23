@@ -1,4 +1,8 @@
 require("lib.scripts.gen")
+require("lib.features.all")
+
+local lds_count = math.max(1, math.ceil(ldinc_railgun_artillery.lib.features.scale.recipe / 3))
+local copper_cable_count = 30 * ldinc_railgun_artillery.lib.features.scale.recipe
 
 ---@type data.RecipePrototype
 local recipe = {
@@ -10,12 +14,12 @@ local recipe = {
 		{
 			type = "item",
 			name = "low-density-structure",
-			amount = 1,
+			amount = lds_count,
 		},
 		{
 			type = "item",
 			name = "copper-cable",
-			amount = 100,
+			amount = copper_cable_count,
 		},
 	},
 	main_product = ldinc_railgun_artillery.lib.constant.name.shell.body,
@@ -30,36 +34,6 @@ local recipe = {
 }
 
 data:extend({ recipe })
-
--- -@type data.RecipePrototype
--- recipe = {
--- 	type = "recipe",
--- 	name = ldinc_railgun_artillery.lib.constant.name.shell.base,
--- 	icon = "__ldinc_railgun_artillery__/graphics/entity/shell/shell-body.png",
--- 	ingredients = {
--- 		{
--- 			type = "item",
--- 			name = "artillery-shell",
--- 			amount = 1,
--- 		},
--- 		{
--- 			type = "item",
--- 			name = ldinc_railgun_artillery.lib.constant.name.shell.body,
--- 			amount = 1,
--- 		},
--- 	},
--- 	main_product = ldinc_railgun_artillery.lib.constant.name.shell.base,
--- 	results = {
--- 		{
--- 			type = "item",
--- 			name = ldinc_railgun_artillery.lib.constant.name.shell.base,
--- 			amount = 1,
--- 		},
--- 	},
--- 	energy_required = 2,
--- }
-
--- data.raw["ammo"]["artillery-shell"].ammo_type.action.action_delivery.trigger_fired_artillery = false
 
 data:extend({
 	ldinc_railgun_artillery.lib.script.gen.shell_recipe(

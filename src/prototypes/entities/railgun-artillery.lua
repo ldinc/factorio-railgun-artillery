@@ -12,7 +12,7 @@ local gun = table.deepcopy(data.raw["gun"]["artillery-wagon-cannon"])
 gun.name = ldinc_railgun_artillery.lib.constant.name.gun
 gun.attack_parameters.ammo_categories = { ldinc_railgun_artillery.lib.constant.name.category }
 gun.attack_parameters.cooldown = 60
-gun.attack_parameters.range = 400
+gun.attack_parameters.range = ldinc_railgun_artillery.lib.features.radius
 gun.attack_parameters.damage_modifier = 10
 gun.attack_parameters.shell_particle = nil
 
@@ -76,7 +76,7 @@ local artillery = {
 	turret_rotation_speed = 0.005,
 	turn_after_shooting_cooldown = 10,
 	cannon_parking_frame_count = 8,
-	cannon_parking_speed = 1,
+	cannon_parking_speed = 2,
 	manual_range_modifier = 2.0,
 	resistances =
 	{
@@ -182,9 +182,6 @@ artillery.name = "ldinc-railgun-artillery"
 
 artillery.ammo_stack_limit = ldinc_railgun_artillery.lib.constant.ammo_stack_size
 artillery.automated_ammo_count = ldinc_railgun_artillery.lib.constant.ammo_stack_size
-artillery.turret_rotation_speed = 0.005
-artillery.turn_after_shooting_cooldown = 10
-artillery.cannon_parking_speed = 2
 
 artillery.gun = "ldinc-artillery-railgun-cannon"
 artillery.minable.result = "ldinc-railgun-artillery"

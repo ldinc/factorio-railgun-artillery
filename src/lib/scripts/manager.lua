@@ -46,9 +46,9 @@ end
 
 ---@type table<string,  (string|(string|(string)[])[])?>
 local loc_strings = {
-	l = {"ldinc_railgun_artillery_info", "low" },
-	m = {"ldinc_railgun_artillery_info", "mid-level" },
-	f = {"ldinc_railgun_artillery_info", "full" },
+	l = { "ldinc_railgun_artillery_info", "low" },
+	m = { "ldinc_railgun_artillery_info", "mid-level" },
+	f = { "ldinc_railgun_artillery_info", "full" },
 }
 
 
@@ -79,7 +79,6 @@ local function disable_railgun(railgun, electric_interface)
 				diode = defines.entity_status_diode.red,
 				label = { "entity-status.no-power" },
 			}
-
 		end
 	end
 end
