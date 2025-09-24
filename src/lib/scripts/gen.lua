@@ -6,23 +6,57 @@ if not ldinc_railgun_artillery.lib.script.gen then ldinc_railgun_artillery.lib.s
 require("lib.constant")
 require("lib.features.all")
 
+function ldinc_railgun_artillery.lib.script.gen.create_modified_projectile(original_name)
+	local original = data.raw["projectile"][original_name]
+	if not original then
+		return
+	end
+
+	local new_name = "ldinc_railgun_artillery-" .. original_name
+
+	if data.raw["projectile"][new_name] then
+		return
+	end
+
+	local new_projectile = table.deepcopy(original)
+	new_projectile.name = new_name
+
+	ldinc_railgun_artillery.lib.script.gen.modify_damage(new_projectile.action)
+
+	data:extend({ new_projectile })
+
+	return new_name
+end
+
 function ldinc_railgun_artillery.lib.script.gen.modify_damage(target)
-	if target and target.action then
-		ldinc_railgun_artillery.lib.script.gen.modify_damage(target.action)
+	if not target or type(target) ~= "table" then
+		return
 	end
 
-	if target and target.action_delivery then
-		ldinc_railgun_artillery.lib.script.gen.modify_damage(target.action_delivery)
-	end
-
-	if target and target.target_effects then
-		for _, effect in ipairs(target.target_effects) do
-			ldinc_railgun_artillery.lib.script.gen.modify_damage(effect)
-		end
-	end
-
-	if target and target.type == "damage" and target.damage and target.damage.amount then
+	if target.type == "damage" and target.damage and target.damage.amount then
 		target.damage.amount = target.damage.amount * ldinc_railgun_artillery.lib.features.scale.damage
+
+		return
+	end
+
+	if target.type == "projectile" and target.projectile then
+		local new_projectile = ldinc_railgun_artillery.lib.script.gen.create_modified_projectile(target.projectile)
+
+		target.projectile = new_projectile
+
+		return
+	end
+
+	for _, value in pairs(target) do
+		if type(value) == "table" then
+			if value[1] then
+				for _, element in ipairs(value) do
+					ldinc_railgun_artillery.lib.script.gen.modify_damage(element)
+				end
+			else
+				ldinc_railgun_artillery.lib.script.gen.modify_damage(value)
+			end
+		end
 	end
 end
 
@@ -49,8 +83,6 @@ function ldinc_railgun_artillery.lib.script.gen.copy_of_projectile(source_name)
 
 	result.action = table.deepcopy(source.action)
 	result.final_action = table.deepcopy(source.final_action)
-
-	log(serpent.block(result))
 
 	ldinc_railgun_artillery.lib.script.gen.modify_damage(result.action)
 	ldinc_railgun_artillery.lib.script.gen.modify_damage(result.final_action)
