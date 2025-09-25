@@ -20,10 +20,10 @@ script.on_load(
 	end
 )
 
-script.on_event(
-	defines.events.on_runtime_mod_setting_changed,
-	ldinc_railgun_artillery.lib.script.on_runtime_mod_setting_changed
-)
+-- script.on_event(
+-- 	defines.events.on_runtime_mod_setting_changed,
+-- 	ldinc_railgun_artillery.lib.script.on_runtime_mod_setting_changed
+-- )
 
 --- const block
 local stack_size = ldinc_railgun_artillery.lib.features.stack_size

@@ -4,7 +4,7 @@ require("lib.constant")
 local category = {
 	type = "ammo-category",
 	name = ldinc_railgun_artillery.lib.constant.name.category,
-	icon = ldinc_railgun_artillery.lib.constant.path.icon,
+	icon = ldinc_railgun_artillery.lib.constant.path.icon_ac,
 	subgroup = "ammo-category",
 	bonus_gui_order = "o"
 }
