@@ -8,5 +8,6 @@
 - [x] Shells icon
 - [x] Item icon
 - [x] TEch buffs (add new ammo category for buffs)
+- [ ] Fix ammo category icon (set grayscale sprite)
 - [ ] Readme
 - [ ] Release?
