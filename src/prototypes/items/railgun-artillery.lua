@@ -6,6 +6,7 @@ local item_sounds = require("__base__.prototypes.item_sounds")
 --- [ldinc-railgun-artillery]
 local item = table.deepcopy(data.raw["item"]["artillery-turret"])
 
+item.icon = "__ldinc_railgun_artillery__/graphics/icons/railgun-artillery.png"
 item.name = "ldinc-railgun-artillery"
 item.place_result = "ldinc-railgun-artillery"
 
