@@ -50,4 +50,6 @@ eu.chargable_graphics.charge_animation.layers = {
 }
 eu.water_reflection = nil
 
+eu.next_upgrade = nil
+
 data.extend({ eu })

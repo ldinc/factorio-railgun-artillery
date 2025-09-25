@@ -190,6 +190,8 @@ artillery.localised_description = {
 	"ldinc_railgun_artillery_info", "mid-level"
 }
 
+artillery.next_upgrade = nil
+
 data.extend(
 	{
 		artillery,

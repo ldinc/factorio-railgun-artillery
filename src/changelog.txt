@@ -1,8 +1,13 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.2
+Date: 25. 09. 2025
+  Bugfixes:
+    - Fixed potential problems with next_upgrage property.
+---------------------------------------------------------------------------------------------------
 Version: 0.1.1
 Date: 25. 09. 2025
   Bugfixes:
-    - Adding missing icons for electricity statistics.
+    - Added missing icons for electricity statistics.
     - Fixed settings name: Tick -> Ticks
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.0
