@@ -6,6 +6,10 @@ local cap = ldinc_railgun_artillery.lib.features.energy_per_shot * ldinc_railgun
 local flow_limit = ldinc_railgun_artillery.lib.features.energy_per_shot * 3 / 60
 
 eu.name = "ldinc-railgun-artillery-power-unit"
+
+eu.icon = ldinc_railgun_artillery.lib.constant.path.icon_item
+eu.icons = nil
+
 eu.energy_source.buffer_capacity = tostring(cap) .. "J"
 eu.energy_source.drain = "0J"
 eu.energy_source.input_flow_limit = tostring(flow_limit) .. "J"

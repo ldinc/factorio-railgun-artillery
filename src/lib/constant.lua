@@ -25,3 +25,4 @@ ldinc_railgun_artillery.lib.constant.name.category = "ldinc-railgun-artillery-sh
 
 ldinc_railgun_artillery.lib.constant.path.icon = "__ldinc_railgun_artillery__/graphics/entity/shell/shell-body.png"
 ldinc_railgun_artillery.lib.constant.path.icon_ac = "__ldinc_railgun_artillery__/graphics/icons/ammo-category.png"
+ldinc_railgun_artillery.lib.constant.path.icon_item = "__ldinc_railgun_artillery__/graphics/icons/railgun-artillery.png"
