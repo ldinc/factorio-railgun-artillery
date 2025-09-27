@@ -1,6 +1,6 @@
 {
 	"name": "ldinc_railgun_artillery",
-	"version": "0.1.4",
+	"version": "0.1.5",
 	"title": "Railgun artillery",
 	"author": "ldinc",
 	"homepage": "",
@@ -10,7 +10,8 @@
 		"base",
 		"? space-age",
 		"? RampantArsenalFork_Firestorm >= 1.3.0",
-		"? RampantArsenalFork >= 1.0.4"
+		"? RampantArsenalFork >= 1.0.4",
+		"? RampantArsenal"
 	],
 	"quality_required": false,
 	"space_travel_required": false,
