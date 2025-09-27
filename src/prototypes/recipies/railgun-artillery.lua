@@ -16,7 +16,13 @@ local recipe = {
 }
 
 if mods["space-age"] then
-	recipe.ingredients = {}
+	recipe.ingredients = {
+		{ type = "item", name = "tungsten-plate",    amount = 100 },
+		{ type = "item", name = "superconductor",    amount = 100 },
+		{ type = "item", name = "carbon-fiber",      amount = 50 },
+		{ type = "item", name = "quantum-processor", amount = 100 },
+		{ type = "item", name = "refined-concrete",  amount = 100 },
+	}
 end
 
 data:extend({ recipe })
