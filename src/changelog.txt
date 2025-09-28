@@ -1,8 +1,13 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.6
+Date: 28. 09. 2025
+  Bugfixes:
+    - Fixed invalid settings for base canon shadows layer. Startup error with low quality animation enabled is fixed.
+---------------------------------------------------------------------------------------------------
 Version: 0.1.5
 Date: 27. 09. 2025
   Changes:
-    - Added original RampantArsenal for futher compat
+    - Added original RampantArsenal for futher compat.
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.4
 Date: 26. 09. 2025

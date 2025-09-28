@@ -142,7 +142,7 @@ local artillery = {
 				{
 					dice = 4,
 					priority = "very-low",
-					allow_low_quality_rotation = false,
+					allow_low_quality_rotation = true,
 					direction_count = 256,
 					scale = 0.75,
 					apply_projection = false
