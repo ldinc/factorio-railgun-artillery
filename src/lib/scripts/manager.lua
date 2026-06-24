@@ -60,7 +60,7 @@ local function disable_railgun(railgun, electric_interface)
 		return
 	end
 
-	railgun.active = false
+	railgun.disabled_by_script = true
 	railgun.custom_status = {
 		diode = defines.entity_status_diode.yellow,
 		label = { "entity-status.charging" },
@@ -85,7 +85,7 @@ end
 
 ---@param railgun LuaEntity
 local function enable_railgun(railgun)
-	railgun.active = true
+	railgun.disabled_by_script = false
 	railgun.custom_status = {
 		diode = defines.entity_status_diode.green,
 		label = { "description.ldinc_railgun_artillery_status_ready" }
@@ -289,7 +289,7 @@ function ldinc_railgun_artillery.lib.script.manager.on_built_entity(railgun)
 		return
 	end
 
-	electric_interface.minable = false
+	electric_interface.minable_flag = false
 	electric_interface.destructible = false
 
 	local railgun_id = railgun.unit_number

@@ -149,6 +149,7 @@ function ldinc_railgun_artillery.lib.script.gen.shell_recipe(name, content, icon
 	recipe = {
 		type = "recipe",
 		name = name,
+		enabled = false,
 		ingredients = {
 			{
 				type = "item",

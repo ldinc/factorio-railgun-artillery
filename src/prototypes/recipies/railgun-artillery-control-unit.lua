@@ -8,8 +8,9 @@ local copper_cable_count = 30 * ldinc_railgun_artillery.lib.features.scale.recip
 local recipe = {
 	type = "recipe",
 	name = ldinc_railgun_artillery.lib.constant.name.shell.body,
+	enabled = false,
 	icon = "__ldinc_railgun_artillery__/graphics/entity/shell/shell-body-icon.png",
-	category = "crafting",
+	categories = { "crafting" },
 	ingredients = {
 		{
 			type = "item",
