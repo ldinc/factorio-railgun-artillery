@@ -4,7 +4,7 @@ require("lib.features.all")
 local lds_count = math.max(1, math.ceil(ldinc_railgun_artillery.lib.features.scale.recipe / 3))
 local copper_cable_count = 30 * ldinc_railgun_artillery.lib.features.scale.recipe
 
----@type data.RecipePrototype
+---@type RecipePrototype
 local recipe = {
 	type = "recipe",
 	name = ldinc_railgun_artillery.lib.constant.name.shell.body,

@@ -3,6 +3,10 @@
         {
             "name": "spaceage",
             "factorioPath": "d:\\Games\\Factorio\\bin\\x64\\factorio.exe"
+        },
+        {
+            "name": "exp",
+            "factorioPath": "d:\\Games\\Factorio_Experimental\\bin\\x64\\factorio.exe"
         }
     ],
     "Lua.workspace.userThirdParty": [

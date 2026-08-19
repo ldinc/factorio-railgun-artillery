@@ -1,13 +1,13 @@
 require("lib.features.all")
 require("lib.constant")
 
-
 local name = ldinc_railgun_artillery.lib.constant.name.power_unit
+
 local cap = ldinc_railgun_artillery.lib.features.energy_per_shot * ldinc_railgun_artillery.lib.features.stack_size
 local flow_limit = ldinc_railgun_artillery.lib.features.energy_per_shot * 3 / 60
 
-local function make_consumer_power_unit()
-	local eu = {
+data:extend({
+	{
 		type = "electric-energy-interface",
 		name = name,
 
@@ -26,6 +26,7 @@ local function make_consumer_power_unit()
 			"not-selectable-in-game",
 			"hide-alt-info",
 			"not-in-kill-statistics",
+			"not-in-made-in",
 		},
 
 		hidden = true,
@@ -33,6 +34,8 @@ local function make_consumer_power_unit()
 
 		max_health = 500,
 
+		--- an empty collision mask keeps the box for the electric pole coverage check without
+		--- colliding with anything
 		collision_box = { { -1.2, -1.2 }, { 1.2, 1.2 } },
 		collision_mask = { layers = {} },
 		selection_box = { { 0, 0 }, { 0, 0 } },
@@ -57,9 +60,5 @@ local function make_consumer_power_unit()
 		energy_usage = "0J",
 
 		picture = util.empty_sprite(),
-	}
-
-	return eu
-end
-
-data.extend({ make_consumer_power_unit() })
+	},
+})

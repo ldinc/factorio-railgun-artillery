@@ -49,6 +49,13 @@ local startup = {
 	},
 	{
 		type = "bool-setting",
+		name = "ldinc_railgun_artillery_charge_animation",
+		setting_type = "startup",
+		default_value = true,
+		order = "sa_a",
+	},
+	{
+		type = "bool-setting",
 		name = "ldinc_railgun_artillery_alt_sounds",
 		setting_type = "startup",
 		default_value = false,
@@ -83,6 +90,27 @@ local startup = {
 	}
 }
 
---- TODO: adding settings for damage & specs for artillery - radius and etc
-
 data:extend(startup)
+
+--- [runtime settings]
+---@type table<string, ModSetting>
+local runtime = {
+	{
+		type = "bool-setting",
+		name = "ldinc_railgun_artillery_no_power_alert",
+		setting_type = "runtime-global",
+		default_value = true,
+		order = "sa_c",
+	},
+	{
+		type = "int-setting",
+		name = "ldinc_railgun_artillery_animation_radius",
+		setting_type = "runtime-global",
+		default_value = 96,
+		minimum_value = 0,
+		maximum_value = 1024,
+		order = "sa_b",
+	},
+}
+
+data:extend(runtime)

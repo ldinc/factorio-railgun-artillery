@@ -61,7 +61,7 @@ function ldinc_railgun_artillery.lib.script.gen.modify_damage(target)
 end
 
 ---@param source_name string
----@return data.ArtilleryProjectilePrototype?
+---@return ArtilleryProjectilePrototype?
 function ldinc_railgun_artillery.lib.script.gen.copy_of_projectile(source_name)
 	local name = "ldinc_railgun_artillery-" .. source_name
 
@@ -94,7 +94,7 @@ end
 
 --- @param name string
 --- @param icon string?
---- @return data.AmmoItemPrototype?
+--- @return AmmoItemPrototype?
 function ldinc_railgun_artillery.lib.script.gen.shell_item(name, icon, from_ammo, from_projectile)
 	if not from_projectile then
 		from_projectile = "artillery-projectile"
@@ -141,11 +141,11 @@ function ldinc_railgun_artillery.lib.script.gen.shell_item(name, icon, from_ammo
 end
 
 --- @param name string
---- @param content (data.FluidIngredientPrototype|data.ItemIngredientPrototype)[]?
+--- @param content (FluidIngredientPrototype|ItemIngredientPrototype)[]?
 --- @param icon string?
---- @return data.RecipePrototype
+--- @return RecipePrototype
 function ldinc_railgun_artillery.lib.script.gen.shell_recipe(name, content, icon)
-	---@type data.RecipePrototype
+	---@type RecipePrototype
 	recipe = {
 		type = "recipe",
 		name = name,

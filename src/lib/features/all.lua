@@ -43,3 +43,8 @@ ldinc_railgun_artillery.lib.features.radius = get_int(
 	"ldinc_railgun_artillery_base_radius",
 	400
 )
+
+ldinc_railgun_artillery.lib.features.charge_animation_enabled = get_bool(
+	"ldinc_railgun_artillery_charge_animation",
+	true
+)

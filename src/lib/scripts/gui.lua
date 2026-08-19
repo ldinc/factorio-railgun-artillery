@@ -4,6 +4,7 @@ if not ldinc_railgun_artillery.lib.script then ldinc_railgun_artillery.lib.scrip
 if not ldinc_railgun_artillery.lib.script.gui then ldinc_railgun_artillery.lib.script.gui = {} end
 
 require("lib.constant")
+require("lib.features.energy")
 
 local frame_name = "ldinc_railgun_artillery_frame"
 local progressbar_name = "ldinc_railgun_artillery_ui_progress"
@@ -64,7 +65,11 @@ local function generate_frame(player, energy_limit)
 	local statusbar = frame.add({
 		type = "label",
 		name = ui_stat_name,
-		caption = string.format("%.1f/%.1f MJ", 0.0, energy_limit / 1000000),
+		caption = string.format(
+			"%s/%s",
+			ldinc_railgun_artillery.lib.features.energy.format(0),
+			ldinc_railgun_artillery.lib.features.energy.format(energy_limit)
+		),
 	})
 
 	statusbar.style.font_color = ldinc_railgun_artillery.lib.constant.colors.yellow

@@ -4,26 +4,22 @@ require("__core__.lualib.mod-gui")
 require("lib.features.all")
 require("lib.constant")
 require("lib.scripts.init")
+require("lib.scripts.migration")
 require("lib.scripts.load")
 require("lib.scripts.runtime_settings_changed")
 require("lib.scripts.gui")
+require("lib.scripts.commands")
 
 script.on_init(
 	ldinc_railgun_artillery.lib.script.on_init
 )
 
-script.on_load(
-	function()
-		if storage and storage.railgun_manager then
-			storage.railgun.manager = storage.railgun_manager
-		end
+script.on_configuration_changed(
+---@param event ConfigurationChangedData
+	function(event)
+		ldinc_railgun_artillery.lib.script.migration.on_configuration_changed(event)
 	end
 )
-
--- script.on_event(
--- 	defines.events.on_runtime_mod_setting_changed,
--- 	ldinc_railgun_artillery.lib.script.on_runtime_mod_setting_changed
--- )
 
 --- const block
 local stack_size = ldinc_railgun_artillery.lib.features.stack_size
