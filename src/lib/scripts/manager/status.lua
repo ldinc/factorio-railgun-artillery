@@ -191,7 +191,7 @@ local function update_charge_tooltip(railgun, info, energy)
 	local ok, id = pcall(function()
 		return railgun.set_tooltip_field({
 			id = info.tooltip_field_id,
-			name = { "ldinc_railgun_artillery_charge" },
+			name = { "description.ldinc_railgun_artillery_charge" },
 			value = value,
 			order = 1,
 		})

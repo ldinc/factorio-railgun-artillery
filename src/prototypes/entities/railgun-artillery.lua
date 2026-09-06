@@ -187,7 +187,7 @@ artillery.gun = "ldinc-artillery-railgun-cannon"
 artillery.minable.result = "ldinc-railgun-artillery"
 
 artillery.localised_description = {
-	"ldinc_railgun_artillery_info", "mid-level"
+	"description.ldinc_railgun_artillery_info", "mid-level"
 }
 
 artillery.next_upgrade = nil
