@@ -6,16 +6,18 @@ if not ldinc_railgun_artillery.lib.script.gen then ldinc_railgun_artillery.lib.s
 require("lib.constant")
 require("lib.features.all")
 
+---@param original_name string
+---@return string?
 function ldinc_railgun_artillery.lib.script.gen.create_modified_projectile(original_name)
 	local original = data.raw["projectile"][original_name]
 	if not original then
-		return
+		return nil
 	end
 
 	local new_name = "ldinc_railgun_artillery-" .. original_name
 
 	if data.raw["projectile"][new_name] then
-		return
+		return nil
 	end
 
 	local new_projectile = table.deepcopy(original)
@@ -42,7 +44,9 @@ function ldinc_railgun_artillery.lib.script.gen.modify_damage(target)
 	if target.type == "projectile" and target.projectile then
 		local new_projectile = ldinc_railgun_artillery.lib.script.gen.create_modified_projectile(target.projectile)
 
-		target.projectile = new_projectile
+		if new_projectile then
+			target.projectile = new_projectile
+		end
 
 		return
 	end

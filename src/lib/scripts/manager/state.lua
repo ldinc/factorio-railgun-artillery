@@ -50,6 +50,8 @@ local function state_update_for_entity(index)
 	local artillery = info.entity
 
 	if not artillery or not artillery.valid then
+		ldinc_railgun_artillery.lib.script.manager.forget(railgun_id)
+
 		return
 	end
 

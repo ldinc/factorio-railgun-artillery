@@ -58,11 +58,25 @@ script.on_event(
 		defines.events.on_player_mined_entity,
 		defines.events.on_entity_died,
 		defines.events.script_raised_destroy,
-		defines.events.on_space_platform_mined_entity,
+		defines.events.on_space_platform_mined_entity
 	},
 	on_deconstruct
 )
 
+script.on_event(
+	defines.events.on_entity_cloned,
+	function(event)
+		ldinc_railgun_artillery.lib.script.manager.on_built_entity(event.destination)
+	end,
+	{ { filter = "name", name = "ldinc-railgun-artillery" } }
+)
+
+script.on_event(
+	defines.events.on_object_destroyed,
+	function(event)
+		ldinc_railgun_artillery.lib.script.manager.on_object_destroyed(event)
+	end
+)
 
 script.on_event(
 	defines.events.on_trigger_fired_artillery,
@@ -73,19 +87,30 @@ script.on_event(
 	end
 )
 
-script.on_nth_tick(
-	ticks_to_update.state,
-	function()
-		ldinc_railgun_artillery.lib.script.manager.state_update()
-	end
-)
+if (ticks_to_update.state == ticks_to_update.gui) then
+	script.on_nth_tick(
+		ticks_to_update.state,
+		function()
+			ldinc_railgun_artillery.lib.script.manager.state_update()
+			ldinc_railgun_artillery.lib.script.manager.update_ui()
+		end
+	)
+else
+	script.on_nth_tick(
+		ticks_to_update.state,
+		function()
+			ldinc_railgun_artillery.lib.script.manager.state_update()
+		end
+	)
 
-script.on_nth_tick(
-	ticks_to_update.gui,
-	function()
-		ldinc_railgun_artillery.lib.script.manager.update_ui()
-	end
-)
+	script.on_nth_tick(
+		ticks_to_update.gui,
+		function()
+			ldinc_railgun_artillery.lib.script.manager.update_ui()
+		end
+	)
+end
+
 
 script.on_event(
 	defines.events.on_gui_opened,
@@ -101,10 +126,12 @@ script.on_event(
 )
 
 script.on_event(defines.events.on_gui_closed, function(event)
-	if event.gui_type == defines.gui_type.entity and event.entity.name == 'ldinc-railgun-artillery' then
-		local player = game.players[event.player_index]
+	if event.gui_type ~= defines.gui_type.entity then return end
 
-		ldinc_railgun_artillery.lib.script.gui.destroy_extension(player)
-	end
+
+	local entity = event.entity
+	if entity and entity.valid and entity.name ~= 'ldinc-railgun-artillery' then return end
+
+	ldinc_railgun_artillery.lib.script.gui.destroy_extension(game.players[event.player_index])
 end
 )

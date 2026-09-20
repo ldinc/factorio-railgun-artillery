@@ -69,6 +69,10 @@ local function attach_power_unit(railgun, stored_energy)
 		table.insert(storage.railgun.manager.state.queue, railgun.unit_number)
 	end
 
+	if railgun.unit_number then
+		script.register_on_object_destroyed(railgun)
+	end
+
 	return power_unit
 end
 
@@ -144,20 +148,17 @@ function ldinc_railgun_artillery.lib.script.manager.ensure_power_unit(railgun)
 	return power_unit
 end
 
----@param railgun LuaEntity
-function ldinc_railgun_artillery.lib.script.manager.on_destroy_entity(railgun)
-	if not railgun then
-		return
+---@param railgun_id integer?
+---@return boolean removed
+function ldinc_railgun_artillery.lib.script.manager.forget(railgun_id)
+	if not railgun_id then
+		return false
 	end
 
-	if railgun.name ~= "ldinc-railgun-artillery" then
-		return
-	end
-
-	local info = storage.railgun.manager.railguns[railgun.unit_number]
+	local info = storage.railgun.manager.railguns[railgun_id]
 
 	if not info then
-		return
+		return false
 	end
 
 	local electric_interface = storage.railgun.manager.electric_interfaces[info.electric_interface_id]
@@ -170,10 +171,34 @@ function ldinc_railgun_artillery.lib.script.manager.on_destroy_entity(railgun)
 		end
 	end
 
-	visuals.clear(railgun.unit_number)
+	visuals.clear(railgun_id)
 
-	storage.railgun.manager.railguns[railgun.unit_number] = nil
-	storage.railgun.manager.state.destroyed[railgun.unit_number] = true
+	storage.railgun.manager.railguns[railgun_id] = nil
+	storage.railgun.manager.state.destroyed[railgun_id] = true
+
+	return true
+end
+
+---@param railgun LuaEntity
+function ldinc_railgun_artillery.lib.script.manager.on_destroy_entity(railgun)
+	if not railgun or not railgun.valid then
+		return
+	end
+
+	if railgun.name ~= ARTILLERY_NAME then
+		return
+	end
+
+	ldinc_railgun_artillery.lib.script.manager.forget(railgun.unit_number)
+end
+
+---@param event EventData.on_object_destroyed
+function ldinc_railgun_artillery.lib.script.manager.on_object_destroyed(event)
+	if event.type ~= defines.target_type.entity then
+		return
+	end
+
+	ldinc_railgun_artillery.lib.script.manager.forget(event.useful_id)
 end
 
 ---@param railgun? LuaEntity
