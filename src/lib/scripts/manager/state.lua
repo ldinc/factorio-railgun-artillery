@@ -24,8 +24,16 @@ local function state_update_for_entity(index)
 	local state = storage.railgun.manager.state
 	local railgun_id = state.queue[index]
 
+	if not railgun_id then
+		return
+	end
+
 	if state.destroyed[railgun_id] then
-		table.remove(state.queue, index)
+		local last = #state.queue
+
+		state.queue[index] = state.queue[last]
+		state.queue[last] = nil
+
 		state.destroyed[railgun_id] = nil
 
 		return

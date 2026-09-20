@@ -97,10 +97,9 @@ function ldinc_railgun_artillery.lib.script.manager.update_ui()
 
 		if not state.statusbar or not state.statusbar.valid then goto continue end
 
-		state.statusbar.caption = string.format(
-			"%s/%s",
-			ldinc_railgun_artillery.lib.features.energy.format(electric_interface.energy),
-			ldinc_railgun_artillery.lib.features.energy.format(energy_limit)
+		state.statusbar.caption = ldinc_railgun_artillery.lib.features.energy(
+			electric_interface.energy,
+			energy_limit
 		)
 
 		::continue::

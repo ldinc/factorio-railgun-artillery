@@ -31,7 +31,7 @@ local function generate_frame(player, energy_limit)
 
 	local lbl = frame.add({
 		type = "label",
-		caption = "Accumulated energy",
+		caption = { "ldinc_railgun_artillery_accumulated_energy" },
 	})
 
 	lbl.style.font_color = ldinc_railgun_artillery.lib.constant.colors.yellow
@@ -66,10 +66,9 @@ local function generate_frame(player, energy_limit)
 	local statusbar = frame.add({
 		type = "label",
 		name = ui_stat_name,
-		caption = string.format(
-			"%s/%s",
-			ldinc_railgun_artillery.lib.features.energy.format(0),
-			ldinc_railgun_artillery.lib.features.energy.format(energy_limit)
+		caption = ldinc_railgun_artillery.lib.features.energy.format_pair(
+			0,
+			energy_limit
 		),
 	})
 

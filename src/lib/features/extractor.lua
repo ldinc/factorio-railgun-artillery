@@ -14,7 +14,13 @@ function ldinc_railgun_artillery.lib.features.startup.get_int_value_from_setting
 
 	local value = default_value
 
-	local v = settings.startup[setting_name].value
+	local wrap = settings.startup[setting_name]
+
+	if not wrap then
+		return value
+	end
+
+	local v = wrap.value
 
 	if type(v) == "number" then
 		return v
@@ -34,7 +40,13 @@ function ldinc_railgun_artillery.lib.features.startup.get_boolean_value_from_set
 
 	local value = default_value
 
-	local v = settings.startup[setting_name].value
+	local wrap = settings.startup[setting_name]
+
+	if not wrap then
+		return value
+	end
+
+	local v = wrap.value
 
 	if type(v) == "boolean" then
 		return v

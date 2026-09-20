@@ -32,12 +32,12 @@ local ticks_to_update = {
 }
 
 ---@param event EventData.on_built_entity | EventData.on_robot_built_entity | EventData.script_raised_built
-function on_build(event)
+local function on_build(event)
 	ldinc_railgun_artillery.lib.script.manager.on_built_entity(event.entity)
 end
 
 ---@param event EventData.on_robot_mined_entity | EventData.on_player_mined_entity | EventData.on_entity_died | EventData.script_raised_destroy
-function on_deconstruct(event)
+local function on_deconstruct(event)
 	ldinc_railgun_artillery.lib.script.manager.on_destroy_entity(event.entity)
 end
 

@@ -150,7 +150,7 @@ end
 --- @return RecipePrototype
 function ldinc_railgun_artillery.lib.script.gen.shell_recipe(name, content, icon)
 	---@type RecipePrototype
-	recipe = {
+	local recipe = {
 		type = "recipe",
 		name = name,
 		enabled = false,

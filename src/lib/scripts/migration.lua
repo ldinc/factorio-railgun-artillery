@@ -17,7 +17,7 @@ local function report(message)
 end
 
 --- [version_as_number]
---- "0.1.10" -> 100010, so versions can be compared without string parsing at every call site.
+--- "0.1.10" -> 10010, so versions can be compared without string parsing at every call site.
 ---@param version string?
 ---@return integer
 local function version_as_number(version)

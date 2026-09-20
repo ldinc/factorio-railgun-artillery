@@ -46,3 +46,17 @@ function energy.format(value)
 
 	return string.format(number_format .. " %s", value / divisor, unit)
 end
+
+---@param value double
+---@param reference double
+---@return string
+function energy.format_pair(value, reference)
+	local divisor, unit, number_format = energy.scale(reference)
+
+	return string.format(
+		number_format .. "/" .. number_format .. " %s",
+		value / divisor,
+		reference / divisor,
+		unit
+	)
+end
