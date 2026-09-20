@@ -126,12 +126,23 @@ script.on_event(
 )
 
 script.on_event(defines.events.on_gui_closed, function(event)
-	if event.gui_type ~= defines.gui_type.entity then return end
+	if event.gui_type ~= defines.gui_type.entity then
+		return
+	end
 
 
 	local entity = event.entity
-	if entity and entity.valid and entity.name ~= 'ldinc-railgun-artillery' then return end
 
-	ldinc_railgun_artillery.lib.script.gui.destroy_extension(game.players[event.player_index])
+	if entity and entity.valid and entity.name ~= 'ldinc-railgun-artillery' then
+		return
+	end
+
+	local player = game.get_player(event.player_index)
+
+	if not player then
+		return
+	end
+
+	ldinc_railgun_artillery.lib.script.gui.destroy_extension(player)
 end
 )

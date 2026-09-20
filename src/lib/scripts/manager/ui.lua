@@ -9,8 +9,8 @@ require("lib.features.energy")
 
 ---@class Railgun_UI_State
 ---@field player_index integer
----@field progressbar? LuaGuiElement
----@field statusbar? LuaGuiElement
+---@field progressbar LuaGuiElement
+---@field statusbar LuaGuiElement
 ---@field railgun_id integer
 
 --- NOTE:
@@ -20,7 +20,7 @@ require("lib.features.energy")
 
 ---@param state Railgun_UI_State
 function ldinc_railgun_artillery.lib.script.manager.register_opened_ui(state)
-	if not state or not state.progressbar or not state.statusbar then
+	if not state or not state.progressbar or not state.progressbar.valid then
 		return
 	end
 

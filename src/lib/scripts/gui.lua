@@ -17,6 +17,7 @@ local function generate_frame(player, energy_limit)
 	local anchor = {
 		gui = defines.relative_gui_type.container_gui,
 		position = defines.relative_gui_position.bottom,
+		name = ldinc_railgun_artillery.lib.constant.name.artillery,
 	}
 
 	local frame = player.gui.relative.add {
@@ -93,14 +94,13 @@ function ldinc_railgun_artillery.lib.script.gui.make_extension(player, entity, e
 	---@type LuaGuiElement
 	local statusbar
 
-	if not player.gui.relative[frame_name] then
+	gui = player.gui.relative[frame_name]
+
+	if not gui then
 		gui, progressbar, statusbar = generate_frame(player, energy_limit)
 	else
-		gui = player.gui.relative[frame_name]
-
-		if gui then
-			progressbar = gui[progressbar_name]
-		end
+		progressbar = gui[progressbar_name]
+		statusbar = gui[ui_stat_name]
 	end
 
 	ldinc_railgun_artillery.lib.script.manager.register_opened_ui({
@@ -113,13 +113,13 @@ end
 
 ---@param player LuaPlayer
 function ldinc_railgun_artillery.lib.script.gui.destroy_extension(player)
-		local gui = player.gui.relative
+	local gui = player.gui.relative
 
-		local elem = gui[frame_name]
+	local elem = gui[frame_name]
 
-		if elem then
-			elem.destroy()
-		end
+	if elem then
+		elem.destroy()
+	end
 
-		ldinc_railgun_artillery.lib.script.manager.register_closed_ui(player.index)
+	ldinc_railgun_artillery.lib.script.manager.register_closed_ui(player.index)
 end
