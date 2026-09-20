@@ -38,8 +38,6 @@ for _, el in ipairs(list) do
 			el.projectile
 		)
 
-		log(serpent.block(ammo))
-
 		data:extend({ ammo })
 	end
 
@@ -64,7 +62,7 @@ local tech = data.raw["technology"]["ldinc-railgun-artillery"]
 
 if tech then
 	for _, el in ipairs(list) do
-		---@type data.UnlockRecipeModifier
+		---@type UnlockRecipeModifier
 		value = {
 			type = "unlock-recipe",
 			recipe = el.target,

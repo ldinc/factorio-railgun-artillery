@@ -35,7 +35,7 @@ ldinc_railgun_artillery.lib.features.alt_sounds_enabled = get_bool(
 )
 
 ldinc_railgun_artillery.lib.features.scale = {
-	damage = get_int("ldinc_railgun_artillery_damage_scale", 5),
+	damage = get_int("ldinc_railgun_artillery_damage_scale", 10),
 	recipe = get_int("ldinc_railgun_artillery_recipe_scale", 1)
 }
 

@@ -50,8 +50,8 @@ local artillery = {
 	icon = "__ldinc_railgun_artillery__/graphics/icons/railgun-artillery.png",
 	flags = { "placeable-neutral", "placeable-player", "player-creation" },
 	inventory_size = 1,
-	ammo_stack_limit = ldinc_railgun_artillery.lib.constant.ammo_stack_size,
-	automated_ammo_count = ldinc_railgun_artillery.lib.constant.ammo_stack_size,
+	ammo_stack_limit = ldinc_railgun_artillery.lib.features.stack_size,
+	automated_ammo_count = ldinc_railgun_artillery.lib.features.stack_size,
 	alert_when_attacking = false,
 	minable = { mining_time = 0.5, result = ldinc_railgun_artillery.lib.constant.name.artillery },
 	fast_replaceable_group = "artillery-turret",
@@ -180,8 +180,8 @@ local artillery = {
 
 artillery.name = "ldinc-railgun-artillery"
 
-artillery.ammo_stack_limit = ldinc_railgun_artillery.lib.constant.ammo_stack_size
-artillery.automated_ammo_count = ldinc_railgun_artillery.lib.constant.ammo_stack_size
+artillery.ammo_stack_limit = ldinc_railgun_artillery.lib.features.stack_size
+artillery.automated_ammo_count = ldinc_railgun_artillery.lib.features.stack_size
 
 artillery.gun = "ldinc-artillery-railgun-cannon"
 artillery.minable.result = "ldinc-railgun-artillery"

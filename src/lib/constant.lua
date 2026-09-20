@@ -6,9 +6,6 @@ if not ldinc_railgun_artillery.lib.constant.path then ldinc_railgun_artillery.li
 
 require("util")
 
-ldinc_railgun_artillery.lib.constant.energy_per_shot = util.parse_energy("10MJ")
-ldinc_railgun_artillery.lib.constant.ammo_stack_size = 10
-
 ldinc_railgun_artillery.lib.constant.colors = {
 	yellow = util.color("#FFD249"),
 	red = util.color("#DA0801"),
