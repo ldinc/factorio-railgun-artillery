@@ -1,11 +1,16 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.2.1
+Date: 21. 09. 2026
+  Changes:
+    - The small code fixes and optimizations.
+---------------------------------------------------------------------------------------------------
 Version: 0.2.0
 Date: 19. 08. 2026
   Changes:
     - The hidden accumulator entity replaced to hidden electric interface.
     - Added custom charging animation and alerting "not connected to electricity"
     - Added entity tooltip with charging info.
-    - Added extra setting to tune perfomance.
+    - Added extra setting to tune performance.
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.8
 Date: 24. 06. 2026
