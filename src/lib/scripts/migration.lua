@@ -34,9 +34,6 @@ local function version_as_number(version)
 	return tonumber(major) * 1000000 + tonumber(minor) * 10000 + tonumber(patch)
 end
 
---- [normalize]
---- Makes sure the storage layout matches what the current code expects. Safe to call from any
---- event and from a migration script, and it is the only place that knows about legacy keys.
 function migration.normalize()
 	if not storage.railgun then
 		storage.railgun = {}
@@ -59,6 +56,8 @@ function migration.normalize()
 	storage.railgun.visuals = storage.railgun.visuals or { glows = {}, icons = {} }
 	storage.railgun.visuals.glows = storage.railgun.visuals.glows or {}
 	storage.railgun.visuals.icons = storage.railgun.visuals.icons or {}
+	storage.railgun.tooltips = storage.railgun.tooltips or {}
+	storage.railgun.tooltip_fields = nil
 
 	local m = storage.railgun.manager
 

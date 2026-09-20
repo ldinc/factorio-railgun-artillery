@@ -20,7 +20,6 @@ require("lib.scripts.manager.units")
 ---@field skip integer?
 ---@field tooltip_tick uint?
 ---@field tooltip_value string?
----@field tooltip_field_id uint32|false|nil
 
 ---@class Railgun_UI_UpdateInfo
 ---@field player_index integer

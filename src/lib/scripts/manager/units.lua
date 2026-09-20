@@ -173,6 +173,8 @@ function ldinc_railgun_artillery.lib.script.manager.forget(railgun_id)
 
 	visuals.clear(railgun_id)
 
+	status.tooltip_ids()[railgun_id] = nil
+
 	storage.railgun.manager.railguns[railgun_id] = nil
 	storage.railgun.manager.state.destroyed[railgun_id] = true
 
@@ -280,9 +282,12 @@ function ldinc_railgun_artillery.lib.script.manager.rebuild()
 
 	local railgun_count = 0
 	local orphan_count = 0
+	local tooltip_count = 0
 
 	for _, surface in pairs(game.surfaces) do
 		for _, railgun in pairs(surface.find_entities_filtered({ name = ARTILLERY_NAME })) do
+			tooltip_count = tooltip_count + status.clear_charge_tooltips(railgun)
+
 			local power_unit = ldinc_railgun_artillery.lib.script.manager.ensure_power_unit(railgun)
 
 			if power_unit and power_unit.valid then
@@ -308,8 +313,9 @@ function ldinc_railgun_artillery.lib.script.manager.rebuild()
 	end
 
 	log(string.format(
-		"[ldinc_railgun_artillery] rebuild: %d railgun(s) registered, %d orphaned power unit(s) removed",
+		"[ldinc_railgun_artillery] rebuild: %d railgun(s) registered, %d orphaned power unit(s) removed, %d charge tooltip row(s) cleared",
 		railgun_count,
-		orphan_count
+		orphan_count,
+		tooltip_count
 	))
 end

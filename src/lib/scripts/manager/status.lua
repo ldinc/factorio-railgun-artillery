@@ -26,6 +26,8 @@ local CHARGE_FORMAT = string.format(
 
 local TOOLTIP_TICKS = 30
 
+local CHARGE_FIELD_NAME = "ldinc_railgun_artillery_charge"
+
 local BAR_GLYPH = "█"
 local BAR_SEGMENTS = 12
 
@@ -159,15 +161,58 @@ function status.enable(railgun, info, energy)
 		{ "description.ldinc_railgun_artillery_status_ready" }, energy)
 end
 
+---@return table<integer, uint32>
+local function tooltip_ids()
+	if not storage.railgun then
+		storage.railgun = {}
+	end
+
+	storage.railgun.tooltips = storage.railgun.tooltips or {}
+
+	return storage.railgun.tooltips
+end
+
+status.tooltip_ids = tooltip_ids
+
+---@param field RuntimeTooltipField
+---@return boolean
+local function is_charge_field(field)
+	local name = field and field.name
+
+	if type(name) == "string" then
+		return name == CHARGE_FIELD_NAME
+	end
+
+	return type(name) == "table" and name[1] == CHARGE_FIELD_NAME
+end
+
+---@param railgun LuaEntity
+---@return integer cleared
+function status.clear_charge_tooltips(railgun)
+	if not railgun or not railgun.valid then
+		return 0
+	end
+
+	local cleared = 0
+
+	for _, field in pairs(railgun.get_tooltip_fields()) do
+		if field.id and is_charge_field(field) then
+			railgun.clear_tooltip_field(field.id)
+
+			cleared = cleared + 1
+		end
+	end
+
+	tooltip_ids()[railgun.unit_number or 0] = nil
+
+	return cleared
+end
+
 --- [update_charge_tooltip]
 ---@param railgun LuaEntity
 ---@param info Railgun_Info
 ---@param energy double
 local function update_charge_tooltip(railgun, info, energy)
-	if info.tooltip_field_id == false then
-		return
-	end
-
 	if not railgun.valid then
 		return
 	end
@@ -186,26 +231,15 @@ local function update_charge_tooltip(railgun, info, energy)
 
 	info.tooltip_value = value
 
-	--- NOTE: reading a non existing property of a LuaObject raises an error, so the whole
-	--- call is wrapped instead of checking for the method.
-	local ok, id = pcall(function()
-		return railgun.set_tooltip_field({
-			id = info.tooltip_field_id,
-			name = { "ldinc_railgun_artillery_charge" },
-			value = value,
-			order = 1,
-		})
-	end)
+	local ids = tooltip_ids()
+	local railgun_id = railgun.unit_number or 0
 
-	if not storage.railgun.tooltip_fields then
-		storage.railgun.tooltip_fields = ok
-	end
-
-	if ok and type(id) == "number" then
-		info.tooltip_field_id = id
-	else
-		info.tooltip_field_id = false
-	end
+	ids[railgun_id] = railgun.set_tooltip_field({
+		id = ids[railgun_id],
+		name = { CHARGE_FIELD_NAME },
+		value = value,
+		order = 1,
+	})
 end
 
 --- [update_tooltips]
