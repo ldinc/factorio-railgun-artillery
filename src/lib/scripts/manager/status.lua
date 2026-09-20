@@ -244,6 +244,10 @@ end
 
 --- [update_tooltips]
 function ldinc_railgun_artillery.lib.script.manager.update_tooltips()
+	if next(storage.railgun.manager.railguns) == nil then
+		return
+	end
+
 	for _, player in pairs(game.connected_players) do
 		local selected = player.selected
 

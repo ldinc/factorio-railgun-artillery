@@ -54,6 +54,10 @@ end
 
 --- check if ui updates > 256... drop table?
 function ldinc_railgun_artillery.lib.script.manager.update_ui()
+	if next(storage.railgun.manager.ui) == nil then
+		return
+	end
+
 	ldinc_railgun_artillery.lib.script.manager.update_tooltips()
 
 	local stack_size = ldinc_railgun_artillery.lib.features.stack_size
