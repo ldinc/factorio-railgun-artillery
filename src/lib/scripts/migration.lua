@@ -67,7 +67,7 @@ function migration.normalize()
 
 	m.state = m.state or {}
 	m.state.queue = m.state.queue or {}
-	m.state.destroyed = m.state.destroyed or {}
+	m.state.destroyed = nil
 	m.state.current = m.state.current or 0
 	m.state.limit = ldinc_railgun_artillery.lib.features.entities_per_update
 end

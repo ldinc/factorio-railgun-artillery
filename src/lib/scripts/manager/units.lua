@@ -63,7 +63,6 @@ local function attach_power_unit(railgun, stored_energy)
 	}
 
 	storage.railgun.manager.electric_interfaces[power_unit.unit_number] = power_unit
-	storage.railgun.manager.state.destroyed[railgun_id] = nil
 
 	if railgun.unit_number and not known then
 		table.insert(storage.railgun.manager.state.queue, railgun.unit_number)
@@ -176,7 +175,6 @@ function ldinc_railgun_artillery.lib.script.manager.forget(railgun_id)
 	status.tooltip_ids()[railgun_id] = nil
 
 	storage.railgun.manager.railguns[railgun_id] = nil
-	storage.railgun.manager.state.destroyed[railgun_id] = true
 
 	return true
 end
@@ -275,7 +273,6 @@ function ldinc_railgun_artillery.lib.script.manager.rebuild()
 	m.ui = {}
 	m.state = {
 		queue = {},
-		destroyed = {},
 		current = 0,
 		limit = ldinc_railgun_artillery.lib.features.entities_per_update,
 	}

@@ -28,20 +28,14 @@ local function state_update_for_entity(index)
 		return
 	end
 
-	if state.destroyed[railgun_id] then
+	local info = storage.railgun.manager.railguns[railgun_id]
+
+	if not info then
 		local last = #state.queue
 
 		state.queue[index] = state.queue[last]
 		state.queue[last] = nil
 
-		state.destroyed[railgun_id] = nil
-
-		return
-	end
-
-	local info = storage.railgun.manager.railguns[railgun_id]
-
-	if not info then
 		return
 	end
 

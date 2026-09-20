@@ -3,8 +3,6 @@ if not ldinc_railgun_artillery.lib then ldinc_railgun_artillery.lib = {} end
 if not ldinc_railgun_artillery.lib.features then ldinc_railgun_artillery.lib.features = {} end
 if not ldinc_railgun_artillery.lib.features.energy then ldinc_railgun_artillery.lib.features.energy = {} end
 
-local energy = ldinc_railgun_artillery.lib.features.energy
-
 ---@type { [1]: number, [2]: string }[]
 local UNITS = {
 	{ 1e15, "PJ" },
@@ -21,7 +19,7 @@ local UNITS = {
 ---@return number divisor
 ---@return string unit
 ---@return string number_format one decimal below 100 units, none above
-function energy.scale(reference)
+function ldinc_railgun_artillery.lib.features.energy.scale(reference)
 	local divisor = 1
 	local unit = "J"
 
@@ -41,8 +39,8 @@ end
 --- Single value with its own unit
 ---@param value double
 ---@return string
-function energy.format(value)
-	local divisor, unit, number_format = energy.scale(value)
+function ldinc_railgun_artillery.lib.features.energy.format(value)
+	local divisor, unit, number_format = ldinc_railgun_artillery.lib.features.energy.scale(value)
 
 	return string.format(number_format .. " %s", value / divisor, unit)
 end
@@ -50,8 +48,8 @@ end
 ---@param value double
 ---@param reference double
 ---@return string
-function energy.format_pair(value, reference)
-	local divisor, unit, number_format = energy.scale(reference)
+function ldinc_railgun_artillery.lib.features.energy.format_pair(value, reference)
+	local divisor, unit, number_format = ldinc_railgun_artillery.lib.features.energy.scale(reference)
 
 	return string.format(
 		number_format .. "/" .. number_format .. " %s",

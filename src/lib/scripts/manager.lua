@@ -33,8 +33,6 @@ function ldinc_railgun_artillery.lib.script.manager.new()
 		state = {
 			---@type integer[]
 			queue = {},
-			---@type table<integer, boolean>
-			destroyed = {},
 			---@type int64
 			current = 0,
 			limit = ldinc_railgun_artillery.lib.features.entities_per_update,
