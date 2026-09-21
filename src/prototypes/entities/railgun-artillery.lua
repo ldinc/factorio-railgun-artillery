@@ -43,7 +43,7 @@ data.extend({
 	gun,
 })
 
----@type data.ArtilleryTurretPrototype
+---@type ArtilleryTurretPrototype
 local artillery = {
 	type = "artillery-turret",
 	name = ldinc_railgun_artillery.lib.constant.name.artillery,

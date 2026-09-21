@@ -1,4 +1,4 @@
----@type data.ArtilleryProjectilePrototype
+---@type ArtilleryProjectilePrototype
 local projectile = {
 	type = "artillery-projectile",
 	name = "railgun-artillery-projectile",

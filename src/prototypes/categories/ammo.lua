@@ -1,6 +1,6 @@
 require("lib.constant")
 
----@type data.AmmoCategory
+---@type AmmoCategory
 local category = {
 	type = "ammo-category",
 	name = ldinc_railgun_artillery.lib.constant.name.category,

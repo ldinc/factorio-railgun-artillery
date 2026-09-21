@@ -1,6 +1,6 @@
 require("lib.constant")
 
----@type data.TechnologyPrototype
+---@type TechnologyPrototype
 local technology = {
 	type = "technology",
 	name = "ldinc-railgun-artillery",

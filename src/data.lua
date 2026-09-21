@@ -15,3 +15,5 @@ require("prototypes.items.railgun-artillery")
 require("prototypes.style.railgun-artillery")
 
 require("prototypes.technology")
+
+require("prototypes.tips")

@@ -1,4 +1,4 @@
----@type data.RecipePrototype
+---@type RecipePrototype
 local recipe = {
 	type = "recipe",
 	name = ldinc_railgun_artillery.lib.constant.name.artillery,

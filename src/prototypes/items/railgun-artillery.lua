@@ -14,7 +14,7 @@ data.extend({ item })
 
 
 --- [ldinc-railgun-artillery-shell-body]
----@type data.ItemPrototype
+---@type ItemPrototype
 local body = {
 	type = "item",
 	name = ldinc_railgun_artillery.lib.constant.name.shell.body,
